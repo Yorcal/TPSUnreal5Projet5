@@ -13,6 +13,10 @@ AChest::AChest()
     PrimaryActorTick.bCanEverTick = true;
     VisualMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Chest"));
     VisualMesh->SetupAttachment(RootComponent);
+	ChestOpen = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ChestOpen"));
+	ChestOpen->SetupAttachment(RootComponent);
+    
+    
 
     BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Collision"));
 
@@ -24,21 +28,21 @@ AChest::AChest()
 
 
     static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/AncientTreasures/Meshes/SM_Chest_02c.SM_Chest_02c"));
-
+    
     if (CubeVisualAsset.Succeeded())
     {
         VisualMesh->SetStaticMesh(CubeVisualAsset.Object);
         BoxCollision->SetRelativeLocation(FVector(0.0f, 0.0f, 0.0f));
-        VisualMesh->SetWorldScale3D(FVector(0.5f));
     }
-
+    //attack boxcolision to actor
+	BoxCollision->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
 void AChest::BeginPlay()
 {
     Super::BeginPlay();
-
+    ChestOpen->SetVisibility(false);
 }
 
 // Called every frame
@@ -59,6 +63,9 @@ void AChest::Tick(float DeltaTime)
 void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
+	VisualMesh->SetVisibility(false);
+    VisualMesh->SetStaticMesh(ChestOpen->GetStaticMesh());
+    VisualMesh->SetVisibility(true);
 }
 
 void AChest::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)

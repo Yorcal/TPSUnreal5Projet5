@@ -14,6 +14,8 @@ class TPSPROJET5_API AChest : public AActor
 {
     GENERATED_BODY()
         UPROPERTY(VisibleAnywhere) UStaticMeshComponent* VisualMesh;
+        UPROPERTY(VisibleAnywhere) UStaticMeshComponent* ChestOpen;
+        
 
 
 
