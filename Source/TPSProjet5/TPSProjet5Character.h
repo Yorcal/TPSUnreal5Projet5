@@ -36,6 +36,9 @@ class ATPSProjet5Character : public ACharacter
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* LookAction;
+	/** Equi Weapon */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+		class UInputAction* EquipAction;
 
 public:
 	ATPSProjet5Character();
@@ -48,6 +51,8 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
+	
+	void EquipWeapon(const FInputActionValue& Value);
 			
 
 protected:

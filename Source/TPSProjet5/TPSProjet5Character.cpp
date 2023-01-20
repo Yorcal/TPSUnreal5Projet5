@@ -83,6 +83,8 @@ void ATPSProjet5Character::SetupPlayerInputComponent(class UInputComponent* Play
 
 		//Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ATPSProjet5Character::Look);
+		//Equip Desequip weapon 
+		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &ATPSProjet5Character::EquipWeapon);
 
 	}
 
@@ -122,6 +124,13 @@ void ATPSProjet5Character::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void ATPSProjet5Character::EquipWeapon(const FInputActionValue& Value)
+{
+
+	// add yaw and pitch input to controller
+	UE_LOG(LogTemp, Warning, TEXT("EquipWeapon"));
 }
 
 
