@@ -133,6 +133,14 @@ void ATPSProjet5Character::EquipWeapon(const FInputActionValue& Value)
 	UE_LOG(LogTemp, Warning, TEXT("EquipWeapon"));
 }
 
+int ATPSProjet5Character::GetScore()
+{
+	return Score;
+}
 
+void ATPSProjet5Character::AddScore(int NewScore)
+{
+	Score += NewScore;
+}
 
 
