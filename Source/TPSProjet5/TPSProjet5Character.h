@@ -42,7 +42,14 @@ class ATPSProjet5Character : public ACharacter
 
 public:
 	ATPSProjet5Character();
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+		int Score;
 	
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+		void AddScore(int ScoreToAdd);
+
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
+		int GetScore();
 
 protected:
 
