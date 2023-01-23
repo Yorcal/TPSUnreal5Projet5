@@ -11,7 +11,6 @@
 #include "EnhancedInputSubsystems.h"
 
 
-
 //////////////////////////////////////////////////////////////////////////
 // ATPSProjet5Character
 
@@ -56,8 +55,6 @@ void ATPSProjet5Character::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
-	
-	Score = 0;
 
 	//Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
@@ -141,9 +138,9 @@ int ATPSProjet5Character::GetScore()
 	return Score;
 }
 
-void ATPSProjet5Character::AddScore(int ScoreToAdd)
+void ATPSProjet5Character::AddScore(int NewScore)
 {
-	Score += ScoreToAdd;
+	Score += NewScore;
 }
 
 
