@@ -22,6 +22,7 @@ void ADeathZone::BeginPlay()
 void ADeathZone::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	
 
 }
 
