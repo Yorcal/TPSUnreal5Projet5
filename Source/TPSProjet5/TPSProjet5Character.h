@@ -40,13 +40,18 @@ class ATPSProjet5Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 		class UInputAction* EquipAction;
 	
+	/** Fire Bullet */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+		class UInputAction* FireAction;
+	
 	
 public:
 	ATPSProjet5Character();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Score;
-	
+	UPROPERTY(EditAnywhere)
+		APawn* Bullet = NULL;
 	UFUNCTION(BlueprintCallable)
 		void AddScore(int ScoreToAdd);
 	
@@ -65,6 +70,8 @@ protected:
 	void Look(const FInputActionValue& Value);
 	
 	void EquipWeapon(const FInputActionValue& Value);
+	
+	void FireBullet(const FInputActionValue& Value);
 			
 
 protected:

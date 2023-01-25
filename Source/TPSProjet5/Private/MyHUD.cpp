@@ -10,25 +10,15 @@
 
 AMyHUD::AMyHUD()
 {
-	//static ConstructorHelpers::FObjectFinder<UTexture2D> CrosshairTexObj(TEXT("/Game/Textures/FirstPersonCrosshair"));
-	//CrosshairTexture = CrosshairTexObj.Object;
 
-	static ConstructorHelpers::FClassFinder<UUserWidget> ScoreTextObj(TEXT("/Game/WG_SCORE"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> ScoreTextObj(TEXT("/Game/WG_SCORE.uasset"));
 	ScoreWidgetClass = ScoreTextObj.Class;
 }
 
 void AMyHUD::DrawHUD()
 {
 	Super::DrawHUD();
-
-	/*if (CrosshairTexture)
-	{
-		FVector2D Center(Canvas->ClipX * 0.5f, Canvas->ClipY * 0.5f);
-		FVector2D CrosshairDrawPosition(Center.X - (CrosshairTexture->GetSurfaceWidth() * 0.5f), Center.Y - (CrosshairTexture->GetSurfaceHeight() * 0.5f));
-		FCanvasTileItem TileItem(CrosshairDrawPosition, CrosshairTexture->Resource, FLinearColor::White);
-		TileItem.BlendMode = SE_BLEND_Translucent;
-		Canvas->DrawItem(TileItem);
-	}*/
+	
 }
 
 void AMyHUD::BeginPlay()
@@ -39,9 +29,11 @@ void AMyHUD::BeginPlay()
 	if (ScoreWidgetClass != nullptr)
 	{
 		CurrentScoreWidget = CreateWidget<UUserWidget>(GetWorld(), ScoreWidgetClass);
+		
 
 		if (CurrentScoreWidget) {
 			CurrentScoreWidget->AddToViewport();
 		}
 	}
+	DrawHUD();
 }

@@ -6,6 +6,7 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
+#include "Bullet.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -85,6 +86,8 @@ void ATPSProjet5Character::SetupPlayerInputComponent(class UInputComponent* Play
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ATPSProjet5Character::Look);
 		//Equip Desequip weapon 
 		EnhancedInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &ATPSProjet5Character::EquipWeapon);
+		//Fire Bullet
+		EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &ATPSProjet5Character::FireBullet);
 
 	}
 
@@ -131,6 +134,25 @@ void ATPSProjet5Character::EquipWeapon(const FInputActionValue& Value)
 
 	// add yaw and pitch input to controller
 	UE_LOG(LogTemp, Warning, TEXT("EquipWeapon"));
+}
+
+void ATPSProjet5Character::FireBullet(const FInputActionValue& Value)
+{
+
+	// add yaw and pitch input to controller
+	UE_LOG(LogTemp, Warning, TEXT("FireBullet"));
+	//Spawn Bullet Actor
+	FActorSpawnParameters SpawnParams;
+	SpawnParams.Owner = this;
+	SpawnParams.Instigator = Bullet;
+	FVector SpawnLocation = GetActorLocation();
+	FRotator SpawnRotation = GetActorRotation();
+	SpawnRotation.Pitch += 90.0f;
+	SpawnRotation.Roll = 0.0f;
+
+	// spawn the projectile at the muzzle
+	GetWorld()->SpawnActor<ABullet>(Bullet->StaticClass(), SpawnLocation, SpawnRotation, SpawnParams);
+	
 }
 
 int ATPSProjet5Character::GetScore()
