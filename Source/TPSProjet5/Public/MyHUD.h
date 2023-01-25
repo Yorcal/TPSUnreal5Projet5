@@ -20,8 +20,8 @@ public:
 	virtual void BeginPlay() override;
 	
 private:
-	UPROPERTY(EditAnywhere)
-		UTexture2D* CrosshairTexture;
+	/*UPROPERTY(EditAnywhere)
+		UTexture2D* CrosshairTexture;*/
 
 	UPROPERTY(EditAnywhere, category = "Score")
 		TSubclassOf<class UUserWidget> ScoreWidgetClass;

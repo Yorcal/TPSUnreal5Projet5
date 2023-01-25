@@ -40,18 +40,10 @@ class ATPSProjet5Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 		class UInputAction* EquipAction;
 	
-
-
-	UFONCTION(BlueprintCallable, Category = "Score")
-		void AddScore(int ScoreToAdd);
-
-	UFONCTION(BlueprintCallable, Category = "Score")
-		int GetScore();
 	
 public:
 	ATPSProjet5Character();
-	
-<<<<<<< Updated upstream
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Score;
 	
@@ -63,12 +55,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 		FText GetScoreText();
-=======
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score")
-		int Score;
 	
->>>>>>> Stashed changes
-
 protected:
 
 	/** Called for movement input */

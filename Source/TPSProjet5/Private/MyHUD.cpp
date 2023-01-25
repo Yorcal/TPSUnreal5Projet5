@@ -4,6 +4,7 @@
 #include "MyHUD.h"
 #include "Engine/Canvas.h"
 #include "Engine/Texture2D.h"
+#include "Blueprint/UserWidget.h"
 #include "UObject/ConstructorHelpers.h"
 
 
@@ -20,27 +21,27 @@ void AMyHUD::DrawHUD()
 {
 	Super::DrawHUD();
 
-	if (CrosshairTexture)
+	/*if (CrosshairTexture)
 	{
 		FVector2D Center(Canvas->ClipX * 0.5f, Canvas->ClipY * 0.5f);
 		FVector2D CrosshairDrawPosition(Center.X - (CrosshairTexture->GetSurfaceWidth() * 0.5f), Center.Y - (CrosshairTexture->GetSurfaceHeight() * 0.5f));
 		FCanvasTileItem TileItem(CrosshairDrawPosition, CrosshairTexture->Resource, FLinearColor::White);
 		TileItem.BlendMode = SE_BLEND_Translucent;
 		Canvas->DrawItem(TileItem);
-	}
+	}*/
 }
 
 void AMyHUD::BeginPlay()
 {
-	Super::BeginPlay;
+	Super::BeginPlay();
 
 
 	if (ScoreWidgetClass != nullptr)
 	{
-		CurrentScoreWidget = CreateWidget<UUserWidget>(this, UUserWidget::StaticClass());
+		CurrentScoreWidget = CreateWidget<UUserWidget>(GetWorld(), ScoreWidgetClass);
 
 		if (CurrentScoreWidget) {
-			CurrentScoreWidget->AddToViewPort();
+			CurrentScoreWidget->AddToViewport();
 		}
 	}
 }

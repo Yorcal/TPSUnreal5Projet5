@@ -133,7 +133,6 @@ void ATPSProjet5Character::EquipWeapon(const FInputActionValue& Value)
 	UE_LOG(LogTemp, Warning, TEXT("EquipWeapon"));
 }
 
-<<<<<<< Updated upstream
 int ATPSProjet5Character::GetScore()
 {
 	return Score;
@@ -142,16 +141,6 @@ int ATPSProjet5Character::GetScore()
 void ATPSProjet5Character::AddScore(int NewScore)
 {
 	Score += NewScore;
-=======
-void ATPSProjet5Character::AddScore(int AddScore)
-{
-	Score += AddScore;
-}
-
-void ATPSProjet5Character::GetScore()
-{
-	return Score;
->>>>>>> Stashed changes
 }
 
 FText ATPSProjet5Character::GetScoreText()
