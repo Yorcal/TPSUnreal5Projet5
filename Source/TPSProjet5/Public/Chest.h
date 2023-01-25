@@ -22,12 +22,6 @@ class TPSPROJET5_API AChest : public AActor
 public:
     // Sets default values for this actor's properties
     AChest();
-
-protected:
-    // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
-
-public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
 
@@ -38,5 +32,10 @@ public:
 
     UFUNCTION()
         void OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
+    UFUNCTION()
+        void GiveScore();
+    
+protected:
+    // Called when the game starts or when spawned
+    virtual void BeginPlay() override;      
 };

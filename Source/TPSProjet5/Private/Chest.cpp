@@ -64,3 +64,8 @@ void AChest::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActo
 {
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap End"));
 }
+
+void AChest::GiveScore()
+{
+    
+}

@@ -143,4 +143,8 @@ void ATPSProjet5Character::AddScore(int NewScore)
 	Score += NewScore;
 }
 
+FText ATPSProjet5Character::GetScoreText()
+{
+	return FText::FromString(FString::FromInt(Score));
+}
 

@@ -51,6 +51,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 		int GetScore();
+	
+	UFUNCTION(BlueprintCallable)
+		FText GetScoreText();
 
 protected:
 
