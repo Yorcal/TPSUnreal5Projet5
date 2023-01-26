@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "Bullet.h"
+#include "Engine/EngineTypes.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -138,21 +139,23 @@ void ATPSProjet5Character::EquipWeapon(const FInputActionValue& Value)
 
 void ATPSProjet5Character::FireBullet(const FInputActionValue& Value)
 {
-
-	// add yaw and pitch input to controller
-	UE_LOG(LogTemp, Warning, TEXT("FireBullet"));
-	//Spawn Bullet Actor
-	FActorSpawnParameters SpawnParams;
-	SpawnParams.Owner = this;
-	SpawnParams.Instigator = Bullet;
-	FVector SpawnLocation = GetActorLocation();
-	FRotator SpawnRotation = GetActorRotation();
-	SpawnRotation.Pitch += 90.0f;
-	SpawnRotation.Roll = 0.0f;
-
-	// spawn the projectile at the muzzle
-	GetWorld()->SpawnActor<ABullet>(Bullet->StaticClass(), SpawnLocation, SpawnRotation, SpawnParams);
-	
+	if (CanFire == true) {
+		// add yaw and pitch input to controller
+		UE_LOG(LogTemp, Warning, TEXT("FireBullet"));
+		//Spawn Bullet Actor
+		FTimerHandle TimerHandle;
+		FActorSpawnParameters SpawnParams;
+		FVector SpawnLocation = GetActorLocation();
+		FRotator SpawnRotation = GetActorRotation();
+		SpawnRotation.Pitch += 90.0f;
+		SpawnRotation.Roll = 0.0f;
+		// spawn the projectile at the muzzle
+		AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(BulletToSpawn, SpawnLocation, SpawnRotation, SpawnParams);
+		//Wait 5 sec
+		CanFire = false;
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ATPSProjet5Character::ResetFire, 1.0f, false);
+		
+	}
 }
 
 int ATPSProjet5Character::GetScore()
@@ -170,3 +173,7 @@ FText ATPSProjet5Character::GetScoreText()
 	return FText::FromString(FString::FromInt(Score));
 }
 
+void ATPSProjet5Character::ResetFire()
+{
+	CanFire = true;
+}

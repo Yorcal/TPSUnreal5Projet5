@@ -51,7 +51,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Score;
 	UPROPERTY(EditAnywhere)
-		APawn* Bullet = NULL;
+		TSubclassOf<AActor> BulletToSpawn;
+	UPROPERTY(EditAnywhere)
+		bool CanFire = true;
+
 	UFUNCTION(BlueprintCallable)
 		void AddScore(int ScoreToAdd);
 	
@@ -72,6 +75,8 @@ protected:
 	void EquipWeapon(const FInputActionValue& Value);
 	
 	void FireBullet(const FInputActionValue& Value);
+	
+	void ResetFire();
 			
 
 protected:

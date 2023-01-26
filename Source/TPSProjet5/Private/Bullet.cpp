@@ -42,6 +42,11 @@ void ABullet::Tick(float DeltaTime)
     SetActorLocationAndRotation(NewLocation, NewRotation);
 	VisualMesh->AddRelativeLocation(FVector(5.f, 0.f, 0.f));
     
+    //Destroy after xTime
+	if (RunningTime > 5.f)
+	{
+		Destroy();
+	}
 
 }
 
