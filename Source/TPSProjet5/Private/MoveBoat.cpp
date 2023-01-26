@@ -18,6 +18,12 @@ AMoveBoat::AMoveBoat()
     BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
     BoxCollision->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
 
+    BoxCollision1 = CreateDefaultSubobject<UBoxComponent>(TEXT("Stop Arret"));
+    BoxCollision1->SetCollisionProfileName(TEXT("Trigger1"));
+    BoxCollision1->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
+    BoxCollision1->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
+
+
 
 
     static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/EF_Lewis/Meshes/boatSmall_a.boatSmall_a"));
@@ -51,6 +57,17 @@ void AMoveBoat::Tick(float DeltaTime)
 void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
+    if (OverlappedComp == BoxCollision)
+    {
+        CanMove = true;
+        //remove the box collision
+        BoxCollision->DestroyComponent();
+    }
+    else if(OverlappedComp == BoxCollision1)
+    {
+        CanMove = false;
+        BoxCollision1->DestroyComponent();
+    }
 }
 
 void AMoveBoat::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
