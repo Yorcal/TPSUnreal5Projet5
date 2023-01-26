@@ -19,9 +19,13 @@ public:
 	// Sets default values for this actor's properties
 	ABullet();
 
+	FVector DirectionBullet;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	
+	FVector GetDirection();
 
 public:	
 	// Called every frame

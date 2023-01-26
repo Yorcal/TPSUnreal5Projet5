@@ -3,6 +3,7 @@
 
 #include "Bullet.h"
 
+
 // Sets default values
 ABullet::ABullet()
 {
@@ -25,22 +26,25 @@ ABullet::ABullet()
 void ABullet::BeginPlay()
 {
 	Super::BeginPlay();
-	
+    DirectionBullet = GetDirection();
 }
 
 // Called every frame
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	//Rotate and move
+	
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("DirectionBullet: %s"), *DirectionBullet.ToString()));
     FVector NewLocation = GetActorLocation();
     FRotator NewRotation = GetActorRotation();
     float RunningTime = GetGameTimeSinceCreation();
     float DeltaHeight = (FMath::Sin(RunningTime + DeltaTime) - FMath::Sin(RunningTime));
     float DeltaRotation = DeltaTime * 100.f;    //Rotate by 20 degrees per second
     NewRotation.Pitch += DeltaRotation;
-    NewRotation.Yaw += DeltaRotation;
+    NewRotation.Yaw *= DeltaRotation;
     SetActorLocationAndRotation(NewLocation, NewRotation);
-	VisualMesh->AddRelativeLocation(FVector(5.f, 0.f, 0.f));
+    VisualMesh->AddRelativeLocation(DirectionBullet * 2500.f * DeltaTime);
     
     //Destroy after xTime
 	if (RunningTime > 5.f)
@@ -49,4 +53,9 @@ void ABullet::Tick(float DeltaTime)
 	}
 
 }
-
+FVector ABullet::GetDirection()
+{
+    FVector Direction = GEngine->GetFirstLocalPlayerController(GetWorld())->PlayerCameraManager->GetActorForwardVector();
+    
+	return Direction;
+}

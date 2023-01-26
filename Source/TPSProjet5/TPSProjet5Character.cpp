@@ -154,7 +154,6 @@ void ATPSProjet5Character::FireBullet(const FInputActionValue& Value)
 		//Wait 5 sec
 		CanFire = false;
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ATPSProjet5Character::ResetFire, 1.0f, false);
-		
 	}
 }
 
