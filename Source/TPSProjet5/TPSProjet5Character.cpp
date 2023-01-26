@@ -165,6 +165,9 @@ int ATPSProjet5Character::GetScore()
 void ATPSProjet5Character::AddScore(int NewScore)
 {
 	Score += NewScore;
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Score : %d"), Score));
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Green, FString::Printf(TEXT("NewScore : %d"), NewScore));
+	
 }
 
 FText ATPSProjet5Character::GetScoreText()

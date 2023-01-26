@@ -50,8 +50,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int Score;
+	
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<AActor> BulletToSpawn;
+	
 	UPROPERTY(EditAnywhere)
 		bool CanFire = true;
 

@@ -2,7 +2,7 @@
 
 
 #include "Chest.h"
-
+#include "TPSProjet5/TPSProjet5Character.h"
 #include "Engine/Engine.h"
 
 
@@ -50,6 +50,7 @@ void AChest::BeginPlay()
 void AChest::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+
 }
 
 void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -58,6 +59,18 @@ void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 	VisualMesh->SetVisibility(false);
     VisualMesh->SetStaticMesh(ChestOpen->GetStaticMesh());
     VisualMesh->SetVisibility(true);
+
+    //get Player
+    APlayerController* PlayerController = GEngine->GetFirstLocalPlayerController(GetWorld());
+	if (PlayerController)
+	{
+        ATPSProjet5Character* Player = Cast<ATPSProjet5Character>(PlayerController->GetPawn());
+		if (Player)
+		{
+			Player->AddScore(100);
+			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Score"));
+		}
+	}
 }
 
 void AChest::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)

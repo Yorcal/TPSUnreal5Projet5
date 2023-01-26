@@ -11,7 +11,7 @@
 AMyHUD::AMyHUD()
 {
 
-	static ConstructorHelpers::FClassFinder<UUserWidget> ScoreTextObj(TEXT("/Game/WG_SCORE.uasset"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> ScoreTextObj(TEXT("/Game/WG_SCORE.WG_SCORE_C"));
 	ScoreWidgetClass = ScoreTextObj.Class;
 }
 
@@ -29,11 +29,8 @@ void AMyHUD::BeginPlay()
 	if (ScoreWidgetClass != nullptr)
 	{
 		CurrentScoreWidget = CreateWidget<UUserWidget>(GetWorld(), ScoreWidgetClass);
-		
-
 		if (CurrentScoreWidget) {
 			CurrentScoreWidget->AddToViewport();
 		}
 	}
-	DrawHUD();
 }

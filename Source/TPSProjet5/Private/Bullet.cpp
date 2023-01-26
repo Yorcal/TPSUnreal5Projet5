@@ -33,9 +33,7 @@ void ABullet::BeginPlay()
 void ABullet::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//Rotate and move
-	
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, FString::Printf(TEXT("DirectionBullet: %s"), *DirectionBullet.ToString()));
+	//Rotate and move the bullet
     FVector NewLocation = GetActorLocation();
     FRotator NewRotation = GetActorRotation();
     float RunningTime = GetGameTimeSinceCreation();
