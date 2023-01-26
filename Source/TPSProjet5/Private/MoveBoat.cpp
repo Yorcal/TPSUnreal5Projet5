@@ -15,8 +15,8 @@ AMoveBoat::AMoveBoat()
 
     BoxCollision->SetCollisionProfileName(TEXT("Trigger"));
 
-    BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &AChest::OnOverlapBegin);
-    BoxCollision->OnComponentEndOverlap.AddDynamic(this, &AChest::OnOverlapEnd);
+    BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
+    BoxCollision->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
 
 
 
@@ -48,15 +48,13 @@ void AMoveBoat::Tick(float DeltaTime)
     }
         
 }
-void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
-    VisualMesh->SetVisibility(false);
-    VisualMesh->SetStaticMesh(ChestOpen->GetStaticMesh());
-    VisualMesh->SetVisibility(true);
 }
 
-void AChest::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+void AMoveBoat::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+}
 
 
