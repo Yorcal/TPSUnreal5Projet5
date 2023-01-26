@@ -23,6 +23,16 @@ AMoveBoat::AMoveBoat()
     BoxCollision1->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
     BoxCollision1->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
 
+    BoxCollision2 = CreateDefaultSubobject<UBoxComponent>(TEXT("Redemarrage"));
+    BoxCollision2->SetCollisionProfileName(TEXT("Trigger2"));
+    BoxCollision2->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
+    BoxCollision2->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
+
+    BoxCollision3 = CreateDefaultSubobject<UBoxComponent>(TEXT("Stop deuxieme Arret"));
+    BoxCollision3->SetCollisionProfileName(TEXT("Trigger3"));
+    BoxCollision3->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
+    BoxCollision3->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
+
 
 
 
@@ -67,6 +77,16 @@ void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
     {
         CanMove = false;
         BoxCollision1->DestroyComponent();
+    }
+    else if (OverlappedComp == BoxCollision2)
+    {
+        CanMove = true;
+        BoxCollision2->DestroyComponent();
+    }
+    else if (OverlappedComp == BoxCollision3)
+    {
+        CanMove = false;
+        BoxCollision3->DestroyComponent();
     }
 }
 
