@@ -60,7 +60,7 @@ void AMoveBoat::Tick(float DeltaTime)
         float RunningTime = GetGameTimeSinceCreation();
         float DeltaHeight = (FMath::Sin(RunningTime + DeltaTime) - FMath::Sin(RunningTime));
         SetActorLocation(NewLocation);
-        VisualMesh->AddRelativeLocation(FVector(0.f, 1.f, 0.f));
+        VisualMesh->AddRelativeLocation(FVector(0.f, 3.f, 0.f));
     }
         
 }

@@ -76,6 +76,7 @@ void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 void AChest::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap End"));
+    BoxCollision->DestroyComponent();
 }
 
 void AChest::GiveScore()
