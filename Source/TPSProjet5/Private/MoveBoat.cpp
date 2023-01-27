@@ -2,6 +2,7 @@
 
 
 #include "MoveBoat.h"
+#include "TPSProjet5/TPSProjet5Character.h"
 
 // Sets default values
 AMoveBoat::AMoveBoat()
@@ -48,6 +49,7 @@ AMoveBoat::AMoveBoat()
 void AMoveBoat::BeginPlay()
 {
 	Super::BeginPlay();
+    //BoxCollision->AttachToComponent(VisualMesh, FAttachmentTransformRules::KeepRelativeTransform);
 	
 }
 
@@ -67,23 +69,25 @@ void AMoveBoat::Tick(float DeltaTime)
 void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
     GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
-    if (OverlappedComp == BoxCollision)
+    APlayerController* PlayerController = GEngine->GetFirstLocalPlayerController(GetWorld());
+    ATPSProjet5Character* Player = Cast<ATPSProjet5Character>(PlayerController->GetPawn());
+	if (OverlappedComp == BoxCollision && OtherActor == Player)
     {
         CanMove = true;
         //remove the box collision
         BoxCollision->DestroyComponent();
     }
-    else if(OverlappedComp == BoxCollision1)
+	else if (OverlappedComp == BoxCollision1 && OtherActor == Player)
     {
         CanMove = false;
         BoxCollision1->DestroyComponent();
     }
-    else if (OverlappedComp == BoxCollision2)
+    else if (OverlappedComp == BoxCollision2 && OtherActor == Player)
     {
         CanMove = true;
         BoxCollision2->DestroyComponent();
     }
-    else if (OverlappedComp == BoxCollision3)
+    else if (OverlappedComp == BoxCollision3 && OtherActor == this)
     {
         CanMove = false;
         BoxCollision3->DestroyComponent();
