@@ -15,6 +15,8 @@ AChest::AChest()
     VisualMesh->SetupAttachment(RootComponent);
 	ChestOpen = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ChestOpen"));
 	ChestOpen->SetupAttachment(RootComponent);
+	FXChestClose = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("FXChestClose"));
+    FXChestOpen = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("FXChestOpen"));
     
     
 
@@ -43,6 +45,7 @@ void AChest::BeginPlay()
 {
     Super::BeginPlay();
     ChestOpen->SetVisibility(false);
+	FXChestOpen->SetVisibility(false);
 }
 
 // Called every frame
@@ -71,6 +74,8 @@ void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Score"));
 		}
 	}
+	FXChestClose->DestroyComponent();
+	FXChestOpen->SetVisibility(true);
 }
 
 void AChest::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)

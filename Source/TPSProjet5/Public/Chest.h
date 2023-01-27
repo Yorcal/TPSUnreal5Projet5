@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "Chest.generated.h"
 
 
@@ -15,6 +16,8 @@ class TPSPROJET5_API AChest : public AActor
     GENERATED_BODY()
         UPROPERTY(VisibleAnywhere) UStaticMeshComponent* VisualMesh;
         UPROPERTY(VisibleAnywhere) UStaticMeshComponent* ChestOpen;
+        UPROPERTY(VisibleAnywhere) UParticleSystemComponent* FXChestClose;
+        UPROPERTY(VisibleAnywhere) UParticleSystemComponent* FXChestOpen;
         
 
 
