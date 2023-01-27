@@ -34,7 +34,8 @@ AMoveBoat::AMoveBoat()
     BoxCollision3->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
     BoxCollision3->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
 
-
+    BoxCollisionBoat = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Du Bateau"));
+	BoxCollisionBoat->SetupAttachment(VisualMesh);
 
 
     static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/EF_Lewis/Meshes/boatSmall_a.boatSmall_a"));
@@ -49,7 +50,6 @@ AMoveBoat::AMoveBoat()
 void AMoveBoat::BeginPlay()
 {
 	Super::BeginPlay();
-    //BoxCollision->AttachToComponent(VisualMesh, FAttachmentTransformRules::KeepRelativeTransform);
 	
 }
 
@@ -63,6 +63,7 @@ void AMoveBoat::Tick(float DeltaTime)
         float DeltaHeight = (FMath::Sin(RunningTime + DeltaTime) - FMath::Sin(RunningTime));
         SetActorLocation(NewLocation);
         VisualMesh->AddRelativeLocation(FVector(0.f, 3.f, 0.f));
+		BoxCollisionBoat->AddRelativeLocation(FVector(0.f, 3.f, 0.f));
     }
         
 }
@@ -87,7 +88,7 @@ void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
         CanMove = true;
         BoxCollision2->DestroyComponent();
     }
-    else if (OverlappedComp == BoxCollision3 && OtherActor == this)
+    else if (OverlappedComp == BoxCollision3 /* && OtherActor == BoxCollisionBoat*/)
     {
         CanMove = false;
         BoxCollision3->DestroyComponent();
@@ -96,6 +97,7 @@ void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 
 void AMoveBoat::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
+    
 }
 
 
