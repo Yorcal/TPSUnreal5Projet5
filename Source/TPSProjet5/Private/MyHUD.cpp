@@ -29,7 +29,8 @@ void AMyHUD::BeginPlay()
 	if (ScoreWidgetClass != nullptr)
 	{
 		CurrentScoreWidget = CreateWidget<UUserWidget>(GetWorld(), ScoreWidgetClass);
-		if (CurrentScoreWidget) {
+		if (CurrentScoreWidget) 
+		{
 			CurrentScoreWidget->AddToViewport();
 		}
 	}
