@@ -18,7 +18,7 @@ public:
 	AMyHUD();
 	virtual void DrawHUD() override;
 	virtual void BeginPlay() override;
-	
+
 private:
 	/*UPROPERTY(EditAnywhere)
 		UTexture2D* CrosshairTexture;*/
