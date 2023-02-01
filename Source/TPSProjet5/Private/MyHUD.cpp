@@ -25,7 +25,6 @@ void AMyHUD::BeginPlay()
 {
 	Super::BeginPlay();
 
-
 	if (ScoreWidgetClass != nullptr)
 	{
 		CurrentScoreWidget = CreateWidget<UUserWidget>(GetWorld(), ScoreWidgetClass);

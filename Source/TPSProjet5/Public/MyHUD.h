@@ -28,4 +28,6 @@ private:
 	
 	UPROPERTY(EditAnywhere, category = "Score")
 		class UUserWidget* CurrentScoreWidget;
+	UPROPERTY(EditAnywhere, category = "MainMenu")
+		class UUserWidget* WG_MainMenu;
 };

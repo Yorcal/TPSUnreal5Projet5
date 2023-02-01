@@ -23,4 +23,5 @@ void AHUDMainMenu::DrawHUD()
 void AHUDMainMenu::BeginPlay()
 {
 	Super::BeginPlay();
+	
 }
