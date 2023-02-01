@@ -37,6 +37,11 @@ AMoveBoat::AMoveBoat()
     BoxCollisionBoat = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Du Bateau"));
 	BoxCollisionBoat->SetupAttachment(VisualMesh);
 
+    BoxCollision4 = CreateDefaultSubobject<UBoxComponent>(TEXT("redem second passage"));
+    BoxCollision4->SetCollisionProfileName(TEXT("Trigger4"));
+    BoxCollision4->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
+    BoxCollision4->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
+
 
     static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/EF_Lewis/Meshes/boatSmall_a.boatSmall_a"));
     if (CubeVisualAsset.Succeeded())
@@ -93,6 +98,11 @@ void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
         CanMove = false;
         BoxCollision3->DestroyComponent();
     }
+	else if (OverlappedComp == BoxCollision4 && OtherActor == Player)
+	{
+		CanMove = true;
+		BoxCollision4->DestroyComponent();
+	}
 }
 
 void AMoveBoat::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
