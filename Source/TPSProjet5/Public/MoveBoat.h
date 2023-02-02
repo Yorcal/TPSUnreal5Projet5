@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Components/BoxComponent.h"
 #include "MoveBoat.generated.h"
 
@@ -27,6 +28,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Collision3") UBoxComponent* BoxCollision4;
 	UPROPERTY(EditAnywhere, Category = "Collision3") UBoxComponent* BoxCollisionBoat;
 	UPROPERTY(EditAnywhere, Category = "Collision3") UBoxComponent* BoxCollisionEnd;
+	UPROPERTY(EditAnywhere)
+		FName TPS;
 
 	UFUNCTION()
 		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

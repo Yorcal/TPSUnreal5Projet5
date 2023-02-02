@@ -84,6 +84,8 @@ void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
     ATPSProjet5Character* Player = Cast<ATPSProjet5Character>(PlayerController->GetPawn());
 	if (OverlappedComp == BoxCollision && OtherActor == Player)
     {
+        FLatentActionInfo LatentInfo;
+        UGameplayStatics::LoadStreamLevel(this, TPS, true, true, LatentInfo);
         CanMove = true;
         //remove the box collision
         BoxCollision->DestroyComponent();
@@ -112,22 +114,6 @@ void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
 	{
 		CanMove = false;
 		BoxCollisionEnd->DestroyComponent();
-        APlayerController* PlayerController = GEngine->GetFirstLocalPlayerController(GetWorld());
-        if (PlayerController)
-        {
-            ATPSProjet5Character* Player = Cast<ATPSProjet5Character>(PlayerController->GetPawn());
-            if (Player)
-            {
-                if (Player->GetScore() <= 50)
-                {
-                    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Test Score - 50"));
-                }
-                else
-                {
-                    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Test Score + 50"));
-                }
-            }
-        }
 	}
 }
 
