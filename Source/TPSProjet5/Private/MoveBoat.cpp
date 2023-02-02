@@ -37,6 +37,16 @@ AMoveBoat::AMoveBoat()
     BoxCollisionBoat = CreateDefaultSubobject<UBoxComponent>(TEXT("Box Du Bateau"));
 	BoxCollisionBoat->SetupAttachment(VisualMesh);
 
+    BoxCollision4 = CreateDefaultSubobject<UBoxComponent>(TEXT("redem second passage"));
+    BoxCollision4->SetCollisionProfileName(TEXT("Trigger4"));
+    BoxCollision4->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
+    BoxCollision4->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
+
+    BoxCollisionEnd = CreateDefaultSubobject<UBoxComponent>(TEXT("end race"));
+    BoxCollisionEnd->SetCollisionProfileName(TEXT("Trigger5"));
+    BoxCollisionEnd->OnComponentBeginOverlap.AddDynamic(this, &AMoveBoat::OnOverlapBegin);
+    BoxCollisionEnd->OnComponentEndOverlap.AddDynamic(this, &AMoveBoat::OnOverlapEnd);
+
 
     static ConstructorHelpers::FObjectFinder<UStaticMesh> CubeVisualAsset(TEXT("/Game/EF_Lewis/Meshes/boatSmall_a.boatSmall_a"));
     if (CubeVisualAsset.Succeeded())
@@ -93,6 +103,32 @@ void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Othe
         CanMove = false;
         BoxCollision3->DestroyComponent();
     }
+	else if (OverlappedComp == BoxCollision4 && OtherActor == Player)
+	{
+		CanMove = true;
+		BoxCollision4->DestroyComponent();
+	}
+	else if (OverlappedComp == BoxCollisionEnd && OtherActor == Player)
+	{
+		CanMove = false;
+		BoxCollisionEnd->DestroyComponent();
+        APlayerController* PlayerController = GEngine->GetFirstLocalPlayerController(GetWorld());
+        if (PlayerController)
+        {
+            ATPSProjet5Character* Player = Cast<ATPSProjet5Character>(PlayerController->GetPawn());
+            if (Player)
+            {
+                if (Player->GetScore() <= 50)
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Test Score - 50"));
+                }
+                else
+                {
+                    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Test Score + 50"));
+                }
+            }
+        }
+	}
 }
 
 void AMoveBoat::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
