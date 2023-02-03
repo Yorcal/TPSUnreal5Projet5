@@ -58,7 +58,6 @@ void AChest::Tick(float DeltaTime)
 
 void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
 	VisualMesh->SetVisibility(false);
     VisualMesh->SetStaticMesh(ChestOpen->GetStaticMesh());
     VisualMesh->SetVisibility(true);
@@ -71,7 +70,6 @@ void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 		if (Player)
 		{
 			Player->AddScore(100);
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Player Score"));
 		}
 	}
 	FXChestClose->DestroyComponent();
@@ -80,7 +78,6 @@ void AChest::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherAc
 
 void AChest::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap End"));
     BoxCollision->DestroyComponent();
 }
 

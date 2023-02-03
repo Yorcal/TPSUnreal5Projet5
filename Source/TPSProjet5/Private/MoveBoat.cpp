@@ -79,7 +79,6 @@ void AMoveBoat::Tick(float DeltaTime)
 }
 void AMoveBoat::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-    GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Overlap Begin"));
     APlayerController* PlayerController = GEngine->GetFirstLocalPlayerController(GetWorld());
     ATPSProjet5Character* Player = Cast<ATPSProjet5Character>(PlayerController->GetPawn());
 	if (OverlappedComp == BoxCollision && OtherActor == Player)
